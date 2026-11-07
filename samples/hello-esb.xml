@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+  <http:listener-config name="L"><http:listener-connection host="0.0.0.0" port="8081"/></http:listener-config>
+  <flow name="hello">
+    <http:listener config-ref="L" path="/hello"/>
+    <set-payload value="#[output application/json --- {message: 'hello from Mule', echo: attributes.queryParams}]"/>
+  </flow>
+</mule>
